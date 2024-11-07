@@ -1,8 +1,8 @@
 const express = require('express')
 const app = express();
 const mongoose = require('mongoose')
-const userRoute = require('/routes/user')
-const projectRoute = require('/routes/projects')
+const userRoute = require('./routes/user')
+const projectRoute = require('./routes/projects')
 const bodyParser = require('body-parser')
 require('dotenv').config()
 const fileUpload = require('express-fileupload')
