@@ -6,14 +6,7 @@ const projectRoute = require('./routes/projects')
 const bodyParser = require('body-parser')
 require('dotenv').config()
 const fileUpload = require('express-fileupload')
-
-// mongoose.connect(process.env.MONGO_URI)
-// .then(res=>
-//     console.log('Connected to database...')
-// )
-// .catch(err=>
-//     console.log(err)
-// )    
+const cors = require('cors')   
 
 const connectWithMongoDb = async()=>{
     try{
@@ -26,7 +19,7 @@ const connectWithMongoDb = async()=>{
 }
 connectWithMongoDb()
 
-
+app.use(cors())
 app.use(bodyParser.json())
 app.use(fileUpload({
     useTempFiles : true,
