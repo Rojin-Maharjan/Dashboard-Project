@@ -55,7 +55,7 @@ Router.post('/login',async (req,res)=>{
         //check for email
         if(users.length == 0){
             return res.status(500).json({
-                error: 'email already taken'
+                error: 'User cannot be found using this email'
             })
         }
         //check password
@@ -63,7 +63,7 @@ Router.post('/login',async (req,res)=>{
         // console.log(passAuth)
         if(!passAuth){
             return res.status(500).json({
-                error: 'wrong password'
+                error: 'Invalid password'
             })
         }
         const token = jwt.sign({
