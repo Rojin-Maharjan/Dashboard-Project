@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose')
 const userRoute = require('./routes/user')
 const projectRoute = require('./routes/projects')
+const projectListRoute = require('./routes/projectList')
 const bodyParser = require('body-parser')
 require('dotenv').config()
 const fileUpload = require('express-fileupload')
@@ -27,5 +28,6 @@ app.use(fileUpload({
 }));
 app.use('/user',userRoute)
 app.use('/projects',projectRoute)
+app.get('/projects',projectListRoute)
 
 module.exports = app;
