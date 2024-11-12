@@ -3,11 +3,11 @@ const app = express();
 const mongoose = require('mongoose')
 const userRoute = require('./routes/user')
 const projectRoute = require('./routes/projects')
-const projectListRoute = require('./routes/projectList')
 const bodyParser = require('body-parser')
 require('dotenv').config()
 const fileUpload = require('express-fileupload')
-const cors = require('cors')   
+const cors = require('cors');   
+const Projects = require('./models/Projects');
 
 const connectWithMongoDb = async()=>{
     try{
@@ -28,6 +28,10 @@ app.use(fileUpload({
 }));
 app.use('/user',userRoute)
 app.use('/projects',projectRoute)
-app.get('/projects',projectListRoute)
+app.get('/projects',(req,res) =>{
+    projectRoute.find()
+    .then(projects => res.json(Projects))
+    .catch(error => res.json(err))
+})
 
 module.exports = app;
