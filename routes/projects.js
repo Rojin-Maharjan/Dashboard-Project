@@ -14,6 +14,11 @@ cloudinary.config({
     api_secret: process.env.API_SECRET // Click 'View API Keys' above to copy your API secret
 });
 
+Router.get('/list', async(req, res) => {
+        Projects.find()
+        .then(projects => res.json(projects))
+        .catch(err => res.json(err))
+})
 
 Router.post('/upload', checkAuth,async (req,res)=>{
     try {
