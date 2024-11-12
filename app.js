@@ -28,10 +28,10 @@ app.use(fileUpload({
 }));
 app.use('/user',userRoute)
 app.use('/projects',projectRoute)
-app.get('/projects',(req,res) =>{
-    projectRoute.find()
-    .then(projects => res.json(Projects))
-    .catch(error => res.json(err))
+app.get('/projects', (req,res) =>{
+    Projects.find()
+    .then(projects => res.json(projects))
+    .catch(err => res.json(err))
 })
 
 module.exports = app;
