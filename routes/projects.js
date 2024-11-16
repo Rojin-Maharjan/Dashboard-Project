@@ -19,7 +19,7 @@ Router.get('/myprojects', checkAuth, async(req,res) =>{
         const token = req.headers.authorization.split(" ")[1]
         const user = await jwt.verify(token, 'dashboardKey')
         console.log(user)
-        const projects = await Projects.find({user_id:user._id})
+        const projects = await Projects.find({user_id:user._id}).populate('user_id', 'userName logoUrl')
         res.status(200).json({
             Projects: projects
         })
