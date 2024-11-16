@@ -13,7 +13,7 @@ cloudinary.config({
     api_key: process.env.API_KEY, 
     api_secret: process.env.API_SECRET // Click 'View API Keys' above to copy your API secret
 });
-//get own videos
+//get own projects
 Router.get('/myprojects', checkAuth, async(req,res) =>{
     try {
         const token = req.headers.authorization.split(" ")[1]
@@ -30,11 +30,22 @@ Router.get('/myprojects', checkAuth, async(req,res) =>{
         })
     }
 })
-
-Router.get('/list', async(req, res) => {
-        Projects.find()
-        .then(projects => res.json(projects))
-        .catch(err => res.json(err))
+//get all projects
+Router.get('/allprojects', async(req,res) =>{
+    try {
+        // const token = req.headers.authorization.split(" ")[1]
+        // const user = await jwt.verify(token, 'dashboardKey')
+        // console.log(user)
+        const projects = await Projects.find().populate('user_id', 'userName logoUrl')
+        res.status(200).json({
+            Projects: projects
+        })
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({
+            error: err
+        })
+    }
 })
 
 Router.post('/upload', checkAuth,async (req,res)=>{
