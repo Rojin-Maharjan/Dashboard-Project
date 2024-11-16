@@ -55,7 +55,7 @@ Router.post('/login',async (req,res)=>{
         //check for email
         if(users.length == 0){
             return res.status(500).json({
-                error: 'User cannot be found using this email'
+                error: 'User not found'
             })
         }
         //check password
